@@ -2,6 +2,7 @@
 #include "game.hpp"
 
 
+
 int main() 
 {
 
@@ -11,6 +12,7 @@ int main()
 
     // create objects
     Game game;
+
 
     // main game loop
     while (!WindowShouldClose())
