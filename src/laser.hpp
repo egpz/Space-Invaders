@@ -9,7 +9,7 @@ class Laser{
         Laser(Vector2 position, int speed);
         void Update();
         void Draw();
-        // to know if laser move out of the screen to kill it and save computer memory
+            // to know if laser move out of the screen to kill it and save computer memory
         bool active;
 
     private:

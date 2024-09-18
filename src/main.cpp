@@ -7,7 +7,7 @@ int main()
 {
 
     // initialize the window
-    InitWindow(800, 600, "Space Invader");
+    InitWindow(750, 700, "Space Invader");
     SetTargetFPS(60);
 
     // create objects
@@ -21,7 +21,7 @@ int main()
         game.Update();
 
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         game.Draw();
         DrawText("Welcome to Space Invader", 190, 200, 20, LIGHTGRAY);
         EndDrawing();
