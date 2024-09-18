@@ -42,3 +42,7 @@ void Alien::UnloadImages(){
     }
 }
 
+// argument direction update the direction
+void Alien::Update(int direction){
+    position.x += direction;
+}
