@@ -1,2 +1,6 @@
 # Space-Invaders
-Retro Space Invaders Game built in C++, we use the graphic library of raylib
+retro Space Invaders Game built in C++, we use the graphic library of raylib
+
+to run the game, first clone the repo
+
+1. ``` brew install raylib ```
