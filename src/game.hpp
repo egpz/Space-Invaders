@@ -8,11 +8,18 @@
 
 class Game{
     public:
+        // if we need to access to if from game.coo file later on, make it public method
         Game();
         ~Game();
         void Draw();
         void Update();
         void HandleInput();
+        // run determine if the game should run, if dies after 3 times no run
+        bool run;
+        int lives;
+        int score; 
+        int highscore;
+        Music music;
 
     
     private:
@@ -24,6 +31,12 @@ class Game{
         //select a random alien to shoot laser
         void AlienShootLaser();
         void CheckForCollisions();
+        void GameOver();
+        void Reset();
+        void InitGame();
+        void CheckForHighScore();
+        void SaveHighScoreToFile(int highScore);
+        int LoadHighScoreFromFile();    
         Spaceship spaceship;
         std::vector<Obstacle> obstacles;
         // a vector that hold all the aliens
@@ -38,4 +51,6 @@ class Game{
         float mysteryShipSpawnInterval;
         // hold the time mysteryship was spawned
         float timeLastSpawn;
+        Sound explosionSound;
+        double gameStartTime;
 };
