@@ -5,11 +5,11 @@ retro Space Invaders Game built in C++, we use the graphic library of raylib
 to run the game, first clone the repo, then follow the steps:
 
 
-1.for mac, ``` brew install raylib ```
+1. for mac, ``` brew install raylib ```
    
-Linux, ```sudo apt-get install raylib-dev```
+   Linux, ```sudo apt-get install raylib-dev```
    
-Windows, download and follow steps from: https://www.raylib.com/
+   Windows, download and follow steps from: https://www.raylib.com/
 
 2. mac and Linux: ```make```.
 
