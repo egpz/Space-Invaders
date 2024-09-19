@@ -6,8 +6,10 @@ to run the game, first clone the repo, then follow the steps:
 
 
 1.for mac, ``` brew install raylib ```
-   Linux, ```sudo apt-get install raylib-dev```
-   Windows, download and follow steps from: https://www.raylib.com/
+   
+Linux, ```sudo apt-get install raylib-dev```
+   
+Windows, download and follow steps from: https://www.raylib.com/
 
 2. mac and Linux: ```make```.
 
