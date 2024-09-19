@@ -13,6 +13,17 @@ void Laser::Draw(){
         DrawRectangle(position.x, position.y, 4, 15, {243, 216, 63, 255});
 }
 
+// create a new rectangle object, set the x and y position it's width and height, return the rectangle
+Rectangle Laser::getRect()
+{   
+    Rectangle rect;
+    rect.x = position.x;
+    rect.y = position.y;
+    rect.width = 4;
+    rect.height = 15;
+    return rect;
+}
+
 void Laser::Update(){
     // move the laser up by provide a negative value
     position.y += speed;

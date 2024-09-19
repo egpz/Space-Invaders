@@ -7,13 +7,25 @@ Game::Game()
     aliens = CreateAliens();
     aliensDirection = 1;
     timeLastAlienFired = 0;
+    timeLastSpawn = 0.0;
+    mysteryShipSpawnInterval = GetRandomValue(10, 20);
 }
 
 Game::~Game(){
     Alien::UnloadImages();
 }
 
+//update function run 60 times per second
+//  the random interval (like 15 seconds) remains fixed during each frame until the MysteryShip spawns
 void Game::Update(){
+    // GetTime is a raylib function tha return the total time has passed since the program began running
+    double currentTime = GetTime();  // Get the current time (in seconds since the game started)
+    if (currentTime - timeLastSpawn > mysteryShipSpawnInterval) {
+        mysteryship.Spawn();  // Spawn the MysteryShip
+        timeLastSpawn = GetTime();  // Reset the last spawn time to the current time
+        mysteryShipSpawnInterval = GetRandomValue(10, 20);  // Set a new random interval for the next spawn
+    }
+    
     for(auto& laser: spaceship.lasers){
         laser.Update();
     }
@@ -27,6 +39,10 @@ void Game::Update(){
     }
 
     DeleteInactiveLasers(); 
+    mysteryship.Update();
+
+    CheckForCollisions();
+
     // std::cout << "Vecotor Size: " <<  spaceship.lasers.size() << std::endl;
 }
 
@@ -48,6 +64,9 @@ void Game::Draw(){
     for(auto& laser: alienLasers){
         laser.Draw();
     }
+
+    mysteryship.Draw();
+
 }
 
 void Game::HandleInput(){
@@ -153,5 +172,64 @@ void Game::AlienShootLaser()
         alienLasers.push_back(Laser({alien.position.x + alien.alienImages[alien.type - 1].width / 2,
                                     alien.position.y + alien.alienImages[alien.type - 1].height}, 6));
         timeLastAlienFired = GetTime();
+    }
+}
+
+void Game::CheckForCollisions()
+{
+    //spaceship lasers
+
+    // use an iterator to check for GetCollisions
+    for(auto& laser: spaceship.lasers){
+        // iterator point to the beginning of the aliens vector
+        auto iterator = aliens.begin();
+        // until we reach the end of the vector
+        while(iterator != aliens.end()){
+            //we need to check if the laser collides with the alien the iterator points to
+            if(CheckCollisionRecs(iterator -> getRect(), laser.getRect())){
+               // this line removes the alien in which the iterator is pointing and updates the iterator to point to the next element in the vector
+                iterator = aliens.erase(iterator);
+                laser.active = false;
+            }//if there was no collision we move the iterator to point to next alien in the vector
+            else{
+                ++iterator;
+            }
+        }
+
+        for(auto& obstacle: obstacles){
+            auto iterator = obstacle.blocks.begin();
+            while(iterator != obstacle.blocks.end()){
+                if(CheckCollisionRecs(iterator -> getRect(), laser.getRect())){
+                    iterator = obstacle.blocks.erase(iterator);
+                    laser.active = false;
+                } else{
+                    ++iterator;
+                }
+            }
+        }
+
+        if(CheckCollisionRecs(mysteryship.getRect(), laser.getRect())){
+            mysteryship.alive = false;
+            laser.active = false;
+        }   
+    }
+
+    // alien lasers, we loop through all the aliens lasers that are stored in alienlasers vector
+    for(auto& laser: alienLasers){
+        if(CheckCollisionRecs(laser.getRect(), spaceship.getRect())){
+            laser.active = false;
+            std::cout << "Spaceship Hit" << std::endl;
+        }
+           for(auto& obstacle: obstacles){
+            auto iterator = obstacle.blocks.begin();
+            while(iterator != obstacle.blocks.end()){
+                if(CheckCollisionRecs(iterator -> getRect(), laser.getRect())){
+                    iterator = obstacle.blocks.erase(iterator);
+                    laser.active = false;
+                } else{
+                    ++iterator;
+                }
+            }
+        }
     }
 }

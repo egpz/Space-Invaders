@@ -23,7 +23,7 @@ int main()
         BeginDrawing();
         ClearBackground(BLACK);
         game.Draw();
-        DrawText("Welcome to Space Invader", 190, 200, 20, LIGHTGRAY);
+        DrawText("Welcome to Space Invader", 190, 200, 20, WHITE);
         EndDrawing();
     }
 
