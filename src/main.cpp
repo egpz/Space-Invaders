@@ -12,6 +12,7 @@ std::string FormatWithLeadingZeros(int number, int width){
 int main() 
 {
     Color yellow = {243, 216, 63, 255};
+    // Color green = {0, 255, 0, 255}; 
     int offset = 50;
     int windowWidth = 750;
     int  windowHeight = 700;

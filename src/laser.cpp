@@ -10,7 +10,7 @@ Laser::Laser(Vector2 position, int speed)
 
 void Laser::Draw(){
     if(active)
-        DrawRectangle(position.x, position.y, 4, 15, {243, 216, 63, 255});
+        DrawRectangle(position.x, position.y, 4, 15, {0, 255, 0, 255});
 }
 
 // create a new rectangle object, set the x and y position it's width and height, return the rectangle
